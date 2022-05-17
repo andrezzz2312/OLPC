@@ -1,0 +1,132 @@
+body {
+    margin: 1em;
+    padding: 0;
+    font-family: Google Sans, Noto, Roboto, Helvetica Neue, sans-serif;
+    color: #244376;
+  }
+  
+  
+  #card {
+    margin: 3em auto;
+ 
+    width: 900px; 
+    height: 1000px;
+    border-radius: 6px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+    overflow: hidden; 
+    position: absolute; 
+    left: 50px;
+  }
+  
+  model-viewer {
+    width: 800px;
+    height: 1000px;
+    background-color: #ffffff;
+    --poster-color: #ffffff00;
+  }
+  button{ 
+    font-size:10px; 
+    left:30%;
+  }
+  .attribution {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1em;
+  }
+  
+  .attribution h1 {
+    margin: 0 0 0.25em;
+  }
+  
+  .attribution img {
+    opacity: 0.5;
+    height: 2em;
+  }
+  
+  .attribution .cc {
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+  
+  footer {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    font-style: italic;
+    line-height: 1.5em;
+  } 
+ 
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {  
+   #card{ 
+     width: 100%; 
+    height: 800px; 
+    position: absolute; 
+    left: 0; 
+    top: 5%;
+   } 
+   model-viewer {
+    width: 500px;
+    height: 800px; 
+    margin: 0 auto;
+  } 
+  }  
+  @media screen and (min-width: 411px) and (max-width: 414px) {  
+    #card{ 
+      width: 365px; 
+     height: 490px; 
+     position: absolute; 
+     left: 10px; 
+     top: 50px; 
+    } 
+    model-viewer {
+     width: 365px;
+     height: 490px; 
+     margin: 0 auto;
+   } 
+   } 
+   @media screen and (min-width: 375px) and (max-width: 375.5px) {  
+    #card{ 
+      width: 355px; 
+     height: 490px; 
+     position: absolute; 
+     left: 10px; 
+     top: 50px; 
+    } 
+    model-viewer {
+     width: 355px;
+     height: 490px; 
+     margin: 0 auto;
+   } 
+   }  
+   @media screen and (min-width: 360px) and (max-width: 365.5px) {  
+    #card{ 
+      width: 340px; 
+     height: 490px; 
+     position: absolute; 
+     left: 10px; 
+     top: 50px; 
+    } 
+    model-viewer {
+     width: 340px;
+     height: 490px; 
+     margin: 0 auto;
+   } 
+   }  
+   @media screen and (min-width: 320px) and (max-width: 320.5px) {  
+    #card{ 
+      width: 300px; 
+     height: 420px; 
+     position: absolute; 
+     left: 10px; 
+     top: 30px; 
+    } 
+    model-viewer {
+     width: 300px;
+     height: 420px; 
+     margin: 0 auto;
+   } 
+   } 

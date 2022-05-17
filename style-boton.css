@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+:root {
+  --border-width: 0.24em;
+  --green-color: #2cbd52;
+  --gray-color: #9a999e;
+}
+
+.btn {
+  box-sizing: content-box;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: 600;
+  font-family: Poppins;
+  color: var(--gray-color);
+  background: transparent;
+  padding: 7px 10px;
+  min-width: 250px;
+  border-radius: 50px;
+  position: relative;
+  border: var(--border-width) solid var(--gray-color);
+}
+
+.btn .point {
+  display: inline-block;
+  width: 11px;
+  height: 12px;
+  background: var(--gray-color);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: calc(var(--border-width) * -1);
+  transform: translate(-50%, -50%);
+}
+
+.btn .border {
+  height: 4.56px;
+  position: absolute;
+  background: var(--green-color);
+}
+
+.btn .topRight {
+  width: 50%;
+  top: calc(var(--border-width) * -1);
+  right: 30px;
+  border-radius: 0 5px 5px 0;
+}
+
+.btn .bottomRight {
+  width: 35%;
+  bottom: calc(var(--border-width) * -1);
+  right: 30px;
+  border-radius: 0 5px 5px 0;
+}
+
+.btn .rightCorner {
+  position: absolute;
+  top: calc(var(--border-width) * -1);
+  right: calc(var(--border-width) * -1);
+  width: 15%;
+  height: 100%;
+  background: transparent;
+  border-radius: 0 50px 50px 0;
+  border-right: var(--border-width) solid var(--green-color);
+  border-top: var(--border-width) solid var(--green-color);
+  border-bottom: var(--border-width) solid var(--green-color);
+}
+
+.wave {
+  overflow: hidden;
+  width: 100%;
+  height: 105%;
+  position: absolute;
+  top: -1px;
+  bottom: 0;
+  left: 1px;
+  border-radius: 50px;
+}
+
+.btn .wave::after {
+  z-index: -1;
+  content: "";
+  width: 200%;
+  height: 105%;
+  background: var(--green-color);
+  display: block;
+  position: absolute;
+  left: 125%;
+  top: 0;
+  -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 10% 100%);
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 10% 100%);
+}
+
+.btn .wave::before {
+  z-index: -1;
+  content: "";
+  width: 200%;
+  height: 105%;
+  background: var(--gray-color);
+  display: block;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 10% 100%);
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 10% 100%);
+}
+
+.btn:hover {
+  color: #fff;
+  border-color: var(--green-color);
+  background-color: var(--green-color);
+  transition: color ease-in-out 0.5s 0.3s, border-color ease-in-out 0.5s 0.3s,
+    background-color ease-in-out 0.3s 0.6s;
+}
+
+.btn:hover .point {
+  background-color: var(--green-color);
+  transition: background-color ease-in-out 0.5s 0.3s;
+}
+
+.btn:hover .wave::after {
+  transition: left ease-in-out 0.9s 0.2s;
+  left: -40%;
+}
+
+.btn:hover .wave::before {
+  transition: left ease-in-out 1s;
+  left: -40%;
+}
+
+.btn:active {
+  box-shadow: inset 4px 4px 0px 1px #1f9e41;
+}

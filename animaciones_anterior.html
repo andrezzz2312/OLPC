@@ -1,0 +1,73 @@
+<script>  
+const objeto = new GLTFLoader(); 
+            objeto.load('objetos/OneLaptopPerChild_Laptop_2.glb', function(gltf){ 
+                var esto = gltf.scene;  
+                esto.position.set(0,0,1); 
+                esto.scale.set(60,60,60);
+                scene.add(esto); 
+				const animations = gltf.animations;  
+				 mixer = new THREE.AnimationMixer(esto); 
+				console.log(animations);  
+                antenas = mixer.clipAction(animations[3]); 
+				cerrar_antenas = mixer.clipAction(animations[1]); 
+				tablet = mixer.clipAction(animations[0]);
+				abrir = mixer.clipAction(animations[4]); 
+				cerrar = mixer.clipAction(animations[5]);
+
+            }); 
+function peso_pantalla_reinicio(){ 
+    abrir.setEffectiveWeight(1);  
+
+   }
+   function abrirpantalla(){   
+       abrir.enabled= true; 
+       antenas.play();
+       abrir.play(); 
+       abrir.clampWhenFinished = true;  
+       abrir.loop = THREE.LoopOnce;    
+       antenas.clampWhenFinished = true;
+       antenas.loop = THREE.LoopOnce; 
+       //abrirpeso = abrir.getEffectiveWeight(); 
+       //escala_tiempo = abrir.getEffectiveTimeScale(0);
+       //console.log("peso-abrir:" + abrirpeso, "tiempo:"+escala_tiempo); 
+   }   
+   function cerrarpantalla(){ 
+    abrir.enabled = false; 
+    cerrar.play(); 
+       cerrar.loop = THREE.LoopOnce;   
+        abrirpeso = abrir.getEffectiveWeight(); 
+       escala_tiempo = abrir.getEffectiveTimeScale();  
+       antenas.enabled=false;
+    cerrar_antenas.play(); 
+    cerrar_antenas.clampWhenFinished = true;  
+    cerrar_antenas.loop = THREE.LoopOnce;   
+    
+       var peso_cerrar = cerrar.getEffectiveWeight(); 
+       var tiempo_cerrar = cerrar.getEffectiveTimeScale();
+       console.log("peso-abrir-pantalla:" + abrirpeso, "tiempo:"+escala_tiempo);   
+       console.log("peso-cerrar-pantalla:" + peso_cerrar, "tiempo:"+ tiempo_cerrar);
+   }  
+   /*function cerrar_ant(){  
+       
+    var tiempo = cerrar_antenas.getEffectiveTimeScale(); 
+    var peso = cerrar_antenas.getEffectiveWeight(); 
+    console.log("tiempo de antenas:"+ tiempo,"peso de anteas:"+peso);
+  
+   }*/ 
+   mixer.addEventListener( 'finished', function( e ) { …} );
+   function modetablet(){ 
+    abrir.play();  
+    //abrir.clampWhenFinished = true;  
+       abrir.loop = THREE.LoopOnce;    
+    tablet.play();   
+    tablet.clampWhenFinished = true;  
+    tablet.loop = THREE.LoopOnce;    
+    cerrar.play();
+    /*cerrar.clampWhenFinished = true;  */
+    cerrar.loop = THREE.LoopOnce; 
+   }
+   //eventos click de animaciones
+   btnabrir.addEventListener('click', abrirpantalla); 
+   btncerrar.addEventListener('click', cerrarpantalla); 
+   btnantenas.addEventListener('click', modetablet);
+</script>

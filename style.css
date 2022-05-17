@@ -1,0 +1,1418 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+* {
+  padding: 0;
+  margin: 0;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+:root {
+  --border-width: 5px;
+  --green-color: #48aabb;
+  --gray-color: #9a999e;
+  --font-size: 1.4rem;
+  --font-weight: 600;
+  --padding: 4px 30px;
+  --width: 260px;
+}
+
+.btnl {
+  width: var(--width);
+  margin: 15px;
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  cursor: pointer;
+  font-family: Poppins;
+  color: var(--gray-color);
+  background: transparent;
+  padding: var(--padding);
+  border-radius: 50px;
+  border: var(--border-width) solid var(--gray-color);
+  position: relative;
+  box-sizing: content-box;
+}
+
+.btnl .point {
+  display: inline-block;
+  width: calc(var(--border-width) * 2);
+  height: calc(var(--border-width) * 2.6);
+  background: var(--gray-color);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: calc(var(--border-width) * -1.2);
+  transform: translate(-50%, -50%);
+}
+
+/****** regular Button ******/
+.btnl .topBorder {
+  display: inline-block;
+  font-size: 0;
+  height: calc(var(--border-width) * 0.85);
+  position: absolute;
+  background: var(--green-color);
+  width: 50%;
+  top: calc(var(--border-width) * -1);
+  right: 30px;
+  border-radius: 0 5px 5px 0;
+}
+
+.btnl .rightCorner {
+  position: absolute;
+  top: calc(var(--border-width) * -1);
+  right: calc(var(--border-width) * -1);
+  width: 40%;
+  height: 100%;
+  background: transparent;
+  border-radius: 0 50px 50px 0;
+  border-right: var(--border-width) solid var(--green-color);
+  border-top: var(--border-width) solid var(--green-color);
+  border-bottom: var(--border-width) solid var(--green-color);
+}
+
+.wave {
+  overflow: hidden;
+  width: 102%;
+  height: 108%;
+  position: absolute;
+  top: -2px;
+  bottom: -1px;
+  left: -1px;
+  border-radius: 50px;
+}
+
+.btnl .wave::after {
+  z-index: -1;
+  content: '';
+  width: 200%;
+  height: 100%;
+  background: var(--green-color);
+  display: block;
+  position: absolute;
+  left: 130%;
+  top: 0;
+  transform: skew(45deg);
+}
+
+.btnl .wave::before {
+  z-index: -1;
+  content: '';
+  width: 200%;
+  height: 100%;
+  background: var(--gray-color);
+  display: block;
+  position: absolute;
+  left: 110%;
+  top: 0;
+  transform: skew(45deg);
+}
+
+.btnl:hover {
+  color: #fff;
+  border-color: var(--green-color);
+  transition: color ease-in-out 0.5s 0.3s, border-color ease-in-out 0.5s 0.3s,
+    background-color ease-in-out 0.3s 0.6s;
+}
+
+.btnl:hover .point {
+  background-color: var(--green-color);
+  transition: background-color ease-in-out 0.4s 0.4s;
+}
+
+.btnl:hover .wave::after {
+  transition: left ease-in-out 0.8s 0.1s;
+  left: -40%;
+}
+
+.btnl:hover .wave::before {
+  transition: left ease-in-out 0.9s;
+  left: -40%;
+}
+
+.btnl:active {
+  box-shadow: inset 4px 4px 0px 1px rgba(14, 8, 8, 0.4);
+}
+
+/*boton de ar*/
+.btnl.rainbow {
+  background-color: var(--green-color);
+  box-shadow: inset 30px 30px var(--green-color);
+  border: var(--border-width) solid var(--green-color);
+  color: #fff;
+}
+
+.btnl.rainbow .point {
+  background: var(--green-color);
+}
+
+.btnl.rainbow .text {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+}
+
+.btnl.rainbow .layers {
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: 100%;
+  background: var(--green-color);
+  border-radius: 50px;
+}
+
+.btnl.rainbow .layer {
+  display: inline-block;
+  font-size: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: 100%;
+  max-height: 100%;
+  border-radius: 20px 20px 0 0;
+}
+
+.btnl.rainbow:hover {
+  border-color: var(--gray-color);
+  transition: border-color linear 1s, box-shadow linear 1s;
+  background-color: var(--gray-color);
+  box-shadow: inset 30px 30px var(--gray-color);
+}
+
+.btnl.rainbow:hover .layers {
+  background-color: var(--gray-color);
+}
+
+.btnl.rainbow:hover .layer {
+  max-height: 0;
+}
+
+.btnl.rainbow:hover .point {
+  background-color: var(--gray-color);
+  transition: background-color linear 1s;
+}
+
+.btnl.rainbow:hover .layer-1 {
+  background-color: #0093d0;
+  transition: max-height linear 0.15s 0.4s;
+}
+
+.btnl.rainbow:hover .layer-2 {
+  background-color: #f78f1e;
+  transition: max-height linear 0.09s 0.3s;
+}
+
+.btnl.rainbow:hover .layer-3 {
+  background-color: #e50278;
+  transition: max-height linear 0.12s 0.15s;
+}
+
+.btnl.rainbow:hover .layer-4 {
+  transition: max-height linear 0.144s;
+}
+
+.btnl.rainbow .layers .layer-4 {
+  background-color: var(--green-color);
+}
+
+.rainbow:active .layers {
+  box-shadow: inset 4px 4px 0px 1px rgba(14, 8, 8, 0.4);
+}
+
+/*@media (min-width: 415.5px) {
+  
+  :root {
+    --width : 90px; 
+    --font-size: 0.9rem; 
+
+  }
+  
+}   */
+
+/*@media (max-width: 568px) {
+  
+  :root {
+    --width : 110px; 
+    --font-size: 0.5rem; 
+
+  }
+  
+}  */
+
+/*@media (max-width: 415px) {
+  :root {
+    --width : 60px; 
+    --font-size: 0.7rem; 
+  } 
+
+}  */
+
+#card {
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  width: 400px;
+  flex-direction: column;
+  top: 200px;
+  z-index: 1;
+}
+#qr {
+  width: 100%;
+  height: auto;
+}
+#view_in_your_space {
+  text-align: center;
+  font-family: Poppins;
+  background-color: var(--gray-color);
+  font-size: 1.2rem;
+}
+
+#screenlabel {
+  text-align: justify;
+  height: 165px;
+  width: 450px;
+  color: #fff;
+  padding: 50px 25px;
+  font-size: 27px;
+  position: absolute;
+  top: 3%;
+  font-family: Poppins;
+  background-color: var(--gray-color);
+  border-radius: 20px;
+  visibility: hidden;
+  opacity: 0.9;
+}
+#track_pad {
+  text-align: justify;
+  height: 165px;
+  width: 450px;
+  color: #fff;
+  padding: 30px 25px;
+  font-size: 27px;
+  position: absolute;
+  top: 2%;
+  right: 52%;
+  font-family: Poppins;
+  background-color: var(--gray-color);
+  border-radius: 20px;
+  visibility: hidden;
+  opacity: 0.9;
+}
+#wifi {
+  text-align: justify;
+  height: 165px;
+  width: 450px;
+  color: #fff;
+  padding: 30px 25px;
+  font-size: 27px;
+  position: absolute;
+  top: 2%;
+  right: 65%;
+  font-family: Poppins;
+  background-color: var(--gray-color);
+  border-radius: 20px;
+  visibility: hidden;
+  opacity: 0.9;
+}
+
+#handle {
+  text-align: justify;
+  height: 165px;
+  width: 450px;
+  color: #fff;
+  padding: 30px 25px;
+  font-size: 27px;
+  position: absolute;
+  top: 5%;
+  right: 60%;
+  font-family: Poppins;
+  background-color: var(--gray-color);
+  border-radius: 20px;
+  opacity: 0.9;
+  visibility: hidden;
+}
+
+#surrounding {
+  text-align: justify;
+  height: 165px;
+  width: 450px;
+  color: #fff;
+  padding: 30px 25px;
+  font-size: 27px;
+  position: absolute;
+  top: 40%;
+  right: 51%;
+  font-family: Poppins;
+  background-color: var(--gray-color);
+  border-radius: 10px;
+  opacity: 0.9;
+  visibility: hidden;
+}
+
+/*inicio de responsive*/
+#container {
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+}
+#cont-canvas {
+  width: 70%;
+  /* margin-top: 20px; */
+  height: 100%;
+}
+#separacion {
+  height: 560px;
+  margin-top: 80px;
+}
+#img_separacion {
+  height: 560px;
+}
+#container-buttomgroup {
+  height: 650px;
+  width: 30%;
+
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 20px;
+}
+#btn_ar {
+  top: 70px;
+}
+
+#contenedor-especificaciones {
+  width: 550px;
+  height: 70px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  visibility: hidden;
+  position: relative;
+  left: -380px;
+  top: -165px;
+}
+#contenedor-especificaciones button {
+  margin: 0 auto;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+}
+/*botones de especificaciones*/
+#btn_screen {
+  text-align: center;
+  background-color: #48aabb;
+  color: white;
+}
+#btn_wifi {
+  text-align: center;
+  background-color: #48aabb;
+  color: white;
+}
+#btn_track_pad {
+  text-align: center;
+  background-color: #48aabb;
+  color: white;
+}
+#btn_handle {
+  text-align: center;
+  background-color: #48aabb;
+  color: white;
+}
+#btn_surrounding {
+  text-align: center;
+  background-color: #48aabb;
+  color: white;
+}
+
+#screenlabel {
+  visibility: hidden;
+}
+#track_pad {
+  visibility: hidden;
+}
+#wifi {
+  visibility: hidden;
+}
+#handle {
+  visibility: hidden;
+}
+#surrounding {
+  visibility: hidden;
+}
+/*laptop*/
+@media only screen and (max-device-width: 1366px) {
+  /* #cont-canvas {
+    width: 490px;
+
+    margin-top: 20px;
+    height: 450px;
+  } */
+  #separacion {
+    height: 520px;
+    margin-top: 30px;
+  }
+  #img_separacion {
+    height: 520px;
+  }
+  #container-buttomgroup {
+    height: 550px;
+    width: 333px;
+    margin-top: 30px;
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 20px;
+  }
+  #btn_ar {
+    top: 40px;
+  }
+  #contenedor-especificaciones {
+    position: relative;
+    left: -330px;
+    top: -21%;
+  }
+  /*textos de informacion ancho 1300px*/
+  #screenlabel {
+    text-align: justify;
+    height: 125px;
+    width: 350px;
+    color: #fff;
+    padding: 25px 25px;
+    font-size: 20px;
+    position: absolute;
+    top: 3%;
+    font-family: Poppins;
+    background-color: var(--gray-color);
+    border-radius: 20px;
+    visibility: hidden;
+    opacity: 0.9;
+  }
+  #track_pad {
+    text-align: justify;
+    height: 125px;
+    width: 350px;
+    color: #fff;
+    padding: 25px 25px;
+    font-size: 20px;
+    position: absolute;
+    top: 2%;
+    right: 52%;
+    font-family: Poppins;
+    background-color: var(--gray-color);
+    border-radius: 20px;
+    visibility: hidden;
+    opacity: 0.9;
+  }
+  #wifi {
+    text-align: justify;
+    height: 125px;
+    width: 350px;
+    color: #fff;
+    padding: 25px 25px;
+    font-size: 20px;
+    position: absolute;
+    top: 2%;
+    right: 65%;
+    font-family: Poppins;
+    background-color: var(--gray-color);
+    border-radius: 20px;
+    visibility: hidden;
+    opacity: 0.9;
+  }
+
+  #handle {
+    text-align: justify;
+    height: 145px;
+    width: 350px;
+    color: #fff;
+    padding: 25px 25px;
+    font-size: 20px;
+    position: absolute;
+    top: 5%;
+    right: 60%;
+    font-family: Poppins;
+    background-color: var(--gray-color);
+    border-radius: 20px;
+    opacity: 0.9;
+    visibility: hidden;
+  }
+
+  #surrounding {
+    text-align: justify;
+    height: 95px;
+    width: 320px;
+    color: #fff;
+    padding: 25px 25px;
+    font-size: 20px;
+    position: absolute;
+    top: 45%;
+    right: 51%;
+    font-family: Poppins;
+    background-color: var(--gray-color);
+    border-radius: 10px;
+    opacity: 0.9;
+    visibility: hidden;
+  }
+  #card {
+    top: 50px;
+    z-index: 1;
+  }
+}
+/*tablet max 1023*/
+@media only screen and (min-device-width: 769.5px) and (max-device-width: 1024px) {
+  #contenedor-especificaciones {
+    left: -270px;
+    width: 450px;
+  }
+  #wifi {
+    top: 2%;
+    right: 60%;
+  }
+  #surrounding {
+    top: 15%;
+    right: 52%;
+  }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 769px) {
+  #separacion {
+    height: 420px;
+    margin-top: 30px;
+  }
+  #img_separacion {
+    height: 420px;
+    visibility: hidden;
+  }
+  #container-buttomgroup {
+    height: 330px;
+    width: 690px;
+    margin-left: 0;
+    align-content: space-between;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 50px;
+  }
+  #container-buttomgroup button {
+    width: 220px;
+    font-size: 0.9rem;
+    margin: 4px 10px;
+    height: 70px;
+  }
+  #btn_ar {
+    top: 0;
+  }
+  #contenedor-especificaciones {
+    width: 450px;
+    height: 70px;
+    left: 0;
+    top: -450px;
+    justify-content: space-around;
+  }
+  #wifi {
+    top: 2%;
+    right: 45%;
+  }
+  #surrounding {
+    top: 31%;
+    right: 20%;
+  }
+  #handle {
+    top: 5%;
+    right: 40%;
+  }
+  #track_pad {
+    top: 2%;
+    right: 12%;
+  }
+}
+/*celulares grandes horizontal*/
+@media only screen and (min-device-width: 731px) and (max-device-width: 736px) {
+  /* #cont-canvas {
+    width: 290px;
+    margin-top: 10px;
+    height: 250px;
+  } */
+  #separacion {
+    height: 220px;
+    margin-top: 30px;
+  }
+  #img_separacion {
+    height: 220px;
+  }
+  #container-buttomgroup {
+    height: 220px;
+    width: 190px;
+    margin-left: 30px;
+  }
+  #container-buttomgroup button {
+    width: 80px;
+    font-size: 0.5rem;
+    margin: 4px 10px;
+  }
+  #btn_ar {
+    top: 15px;
+  }
+  #contenedor-especificaciones {
+    width: 250px;
+    height: 50px;
+    left: -120px;
+    top: -90px;
+  }
+  #contenedor-especificaciones button {
+    margin: 0 auto;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+  }
+  #screenlabel {
+    top: 2%;
+    right: 58%;
+    height: 75px;
+    width: 160px;
+    font-size: 10px;
+  }
+  #track_pad {
+    top: 2%;
+    right: 46%;
+    height: 65px;
+    width: 160px;
+    font-size: 10px;
+  }
+  #wifi {
+    top: 2%;
+    right: 58%;
+    height: 65px;
+    width: 160px;
+    font-size: 10px;
+  }
+  #handle {
+    top: 5%;
+    right: 58%;
+    height: 75px;
+    width: 160px;
+    font-size: 10px;
+  }
+  #surrounding {
+    top: 32%;
+    right: 46%;
+    height: 45px;
+    width: 160px;
+    font-size: 10px;
+  }
+}
+
+@media screen and (min-width: 899px) and (max-width: 999px) {
+  /* #cont-canvas {
+    width: 400px;
+    margin-top: 20px;
+    height: 290px;
+  } */
+  #container-buttomgroup {
+    height: 290px;
+    width: 190px;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-right: 113px;
+  }
+  #container-buttomgroup button {
+    width: 80px;
+    font-size: 0.5rem;
+    margin: 4px 10px;
+  }
+  #img_separacion {
+    height: 245px;
+  }
+  #separacion {
+    height: 245px;
+    margin-top: 30px;
+  }
+  #contenedor-especificaciones {
+    left: -200px;
+    top: -90px;
+    width: 450px;
+  }
+  #contenedor-especificaciones button {
+    margin: 0 auto;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+  }
+}
+@media screen and (min-width: 824px) and (max-width: 896px) {
+  /* #cont-canvas {
+    width: 400px;
+    margin-top: 10px;
+    height: 290px;
+  } */
+  #separacion {
+    height: 245px;
+    margin-top: 30px;
+  }
+  #img_separacion {
+    height: 245px;
+  }
+  #container-buttomgroup {
+    height: 290px;
+    width: 190px;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-right: 113px;
+  }
+  #container-buttomgroup button {
+    width: 80px;
+    font-size: 0.5rem;
+    margin: 4px 10px;
+  }
+  #btn_ar {
+    top: 15px;
+  }
+  #contenedor-especificaciones {
+    width: 250px;
+    height: 50px;
+    left: -170px;
+    top: -30%;
+  }
+  #contenedor-especificaciones button {
+    margin: 0 auto;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+  }
+  #screenlabel {
+    top: 2%;
+    right: 58%;
+    height: 75px;
+    width: 200px;
+    font-size: 12px;
+  }
+  #wifi {
+    top: 2%;
+    right: 58%;
+    height: 65px;
+    width: 200px;
+    font-size: 12px;
+  }
+  #surrounding {
+    top: 18%;
+    right: 47%;
+    height: 55px;
+    width: 200px;
+    font-size: 12px;
+  }
+  #handle {
+    top: 5%;
+    right: 62%;
+    height: 85px;
+    width: 180px;
+    font-size: 12px;
+  }
+  #track_pad {
+    top: 4%;
+    right: 47%;
+    height: 65px;
+    width: 180px;
+    font-size: 12px;
+  }
+}
+@media screen and (min-width: 812px) and (max-width: 823px) {
+  /* #cont-canvas {
+    width: 400px;
+    margin-top: 10px;
+    height: 290px;
+  } */
+  #separacion {
+    height: 245px;
+    margin-top: 30px;
+  }
+  #img_separacion {
+    height: 245px;
+  }
+  #container-buttomgroup {
+    height: 290px;
+    width: 190px;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-right: 113px;
+  }
+  #container-buttomgroup button {
+    width: 80px;
+    font-size: 0.5rem;
+    margin: 4px 10px;
+  }
+  #btn_ar {
+    top: 15px;
+  }
+  #contenedor-especificaciones {
+    width: 250px;
+    height: 50px;
+    left: -170px;
+    top: -35%;
+  }
+  #contenedor-especificaciones button {
+    margin: 0 auto;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+  }
+  #screenlabel {
+    top: 2%;
+    right: 58%;
+    height: 75px;
+    width: 200px;
+    font-size: 12px;
+  }
+  #wifi {
+    top: 2%;
+    right: 58%;
+    height: 65px;
+    width: 200px;
+    font-size: 12px;
+  }
+  #surrounding {
+    top: 10%;
+    right: 47%;
+    height: 55px;
+    width: 200px;
+    font-size: 12px;
+  }
+  #handle {
+    top: 5%;
+    right: 62%;
+    height: 85px;
+    width: 180px;
+    font-size: 12px;
+  }
+  #track_pad {
+    top: 4%;
+    right: 47%;
+    height: 65px;
+    width: 180px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-device-width: 666px) and (max-device-width: 667.5px) {
+  /* #cont-canvas {
+    width: 250px;
+    height: 250px;
+  } */
+  /* #artifactcanvas {
+    width: 250px;
+    height: 250px;
+  } */
+  #separacion {
+    height: 230px;
+    margin-top: 30px;
+  }
+  #img_separacion {
+    height: 230px;
+  }
+  #container-buttomgroup {
+    height: 250px;
+    width: 190px;
+  }
+  #container-buttomgroup button {
+    width: 130px;
+    font-size: 0.5rem;
+    margin: 4px 10px;
+  }
+  #contenedor-especificaciones {
+    position: absolute;
+    width: 250px;
+    height: 50px;
+    left: 80px;
+    top: 230px;
+  }
+  #contenedor-especificaciones button {
+    margin: 0 auto;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+  }
+  #btn_ar {
+    top: 15px;
+  }
+  #surrounding {
+    top: 15%;
+    right: 46%;
+    height: 45px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #screenlabel {
+    top: 2%;
+    right: 55%;
+    height: 60px;
+    width: 200px;
+    font-size: 10.5px;
+  }
+  #track_pad {
+    top: 2%;
+    right: 45%;
+    height: 55px;
+    width: 160px;
+    font-size: 10.5px;
+  }
+  #wifi {
+    top: 2%;
+    right: 58%;
+    height: 60px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #handle {
+    top: 5%;
+    right: 58%;
+    height: 60px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+}
+
+/*celular pequeno horizontal*/
+@media only screen and (min-device-width: 568px) and (max-device-width: 665px) {
+  /* #cont-canvas {
+    width: 290px;
+    margin-top: 10px;
+    height: 250px;
+  } */
+  #separacion {
+    height: 220px;
+    margin-top: 30px;
+  }
+  #img_separacion {
+    height: 220px;
+  }
+  #container-buttomgroup {
+    height: 220px;
+    width: 190px;
+    margin-left: 30px;
+  }
+  #container-buttomgroup button {
+    width: 80px;
+    font-size: 0.5rem;
+    margin: 4px 10px;
+  }
+  #btn_ar {
+    top: 15px;
+  }
+  #contenedor-especificaciones {
+    width: 250px;
+    height: 50px;
+    left: -120px;
+    top: -32%;
+  }
+  #contenedor-especificaciones button {
+    margin: 0 auto;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+  }
+  #surrounding {
+    top: 10%;
+    right: 46%;
+    height: 45px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #screenlabel {
+    top: 2%;
+    right: 55%;
+    height: 60px;
+    width: 200px;
+    font-size: 10.5px;
+  }
+  #track_pad {
+    top: 2%;
+    right: 45%;
+    height: 55px;
+    width: 160px;
+    font-size: 10.5px;
+  }
+  #wifi {
+    top: 2%;
+    right: 58%;
+    height: 60px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #handle {
+    top: 5%;
+    right: 58%;
+    height: 60px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+}
+/*celulares de tamano mas alto vertical*/
+@media only screen and (min-device-width: 376px) and (max-device-width: 462px) and (orientation: portrait) {
+  #surrounding {
+    top: 25%;
+    right: 1%;
+    height: 57px;
+    width: 208px;
+    font-size: 13px;
+  }
+  #screenlabel {
+    top: 2%;
+    right: 35%;
+    height: 88px;
+    width: 216px;
+    font-size: 13px;
+  }
+  #track_pad {
+    top: 6%;
+    right: 10%;
+    height: 88px;
+    width: 216px;
+    font-size: 13px;
+  }
+  #wifi {
+    top: 2%;
+    right: 35%;
+    height: 88px;
+    width: 216px;
+    font-size: 13px;
+  }
+  #handle {
+    top: 5%;
+    right: 34%;
+    height: 88px;
+    width: 216px;
+    font-size: 13px;
+  }
+  /* #cont-canvas {
+    width: 350px;
+    margin-top: 10px;
+    height: 350px;
+  } */
+  #separacion {
+    /*height: 220px; 
+  margin-top: 30px;*/
+    /*height: 5px;*/
+    display: none;
+  }
+  #img_separacion {
+    height: 5px;
+    display: none;
+  }
+  #container-buttomgroup {
+    height: 250px;
+    width: 390px;
+    margin-left: 0;
+    justify-content: space-around;
+    align-content: space-between;
+  }
+  #container-buttomgroup button {
+    width: 80px;
+    font-size: 0.75rem;
+    margin: 4px 10px;
+    height: 50px;
+  }
+  #btn_ar {
+    top: 0;
+  }
+  #contenedor-especificaciones {
+    width: 250px;
+    height: 50px;
+    left: 0;
+    top: -44%;
+  }
+  #contenedor-especificaciones button {
+    margin: 0 auto;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+  }
+}
+/*-----------------------------------*/
+@media only screen and (min-device-width: 374px) and (max-device-width: 375.5px) {
+  /* #cont-canvas {
+    width: 350px;
+    margin-top: 10px;
+    height: 350px;
+  } */
+  #separacion {
+    height: 5px;
+    margin-top: 10px;
+  }
+  #img_separacion {
+    height: 5px;
+    visibility: hidden;
+  }
+  #container-buttomgroup {
+    height: 250px;
+    width: 350px;
+    justify-content: space-around;
+    align-content: space-between;
+    margin: 0;
+  }
+  #container-buttomgroup button {
+    width: 80px;
+    font-size: 0.5rem;
+    margin: 4px 10px;
+    height: 50px;
+  }
+  #btn_ar {
+    top: 0;
+  }
+  #contenedor-especificaciones {
+    width: 250px;
+    height: 50px;
+    left: 10px;
+    top: -380px;
+  }
+  #screenlabel {
+    top: 2%;
+    right: 35%;
+    height: 75px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #surrounding {
+    top: 25%;
+    right: 1%;
+    height: 45px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #track_pad {
+    top: 6%;
+    right: 10%;
+    height: 75px;
+    width: 160px;
+    font-size: 10.5px;
+  }
+
+  #wifi {
+    top: 2%;
+    right: 35%;
+    height: 75px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #handle {
+    top: 5%;
+    right: 34%;
+    height: 75px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #contenedor-especificaciones button {
+    margin: 0 auto;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+  }
+}
+/*---------------------------*/
+/*celular pequeno vertical*/
+@media only screen and (min-device-width: 359px) and (max-device-width: 360px) {
+  /* #cont-canvas {
+    width: 340px;
+    height: 340px;
+    margin-top: 10px;
+  } */
+  #separacion {
+    height: 5px;
+    margin-top: 10px;
+  }
+  #img_separacion {
+    height: 5px;
+    visibility: hidden;
+  }
+  #container-buttomgroup {
+    height: 250px;
+    width: 340px;
+    justify-content: space-around;
+    align-content: space-between;
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 85%;
+  }
+  #container-buttomgroup button {
+    width: 80px;
+    font-size: 0.5rem;
+    margin: 4px 10px;
+    height: 50px;
+  }
+  #btn_ar {
+    top: 0;
+  }
+  #contenedor-especificaciones {
+    width: 250px;
+    height: 50px;
+    position: absolute;
+    left: 17%;
+    top: 32%;
+  }
+  #contenedor-especificaciones button {
+    margin: 0 auto;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+  }
+  #surrounding {
+    top: 25%;
+    right: 1%;
+    height: 45px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #screenlabel {
+    top: 2%;
+    right: 35%;
+    height: 55px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #track_pad {
+    top: 6%;
+    right: 10%;
+    height: 55px;
+    width: 160px;
+    font-size: 10.5px;
+  }
+  #wifi {
+    top: 2%;
+    right: 35%;
+    height: 55px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #handle {
+    top: 5%;
+    right: 34%;
+    height: 60px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+}
+/*celular pequeno vertical*/
+@media only screen and (min-device-width: 320px) and (max-device-width: 320.5px) {
+  #container {
+    justify-content: flex-end;
+  }
+  /* #cont-canvas {
+    width: 300px;
+    height: 300px;
+    margin-top: 10px;
+  } */
+  #separacion {
+    height: 5px;
+    margin-top: 10px;
+  }
+  #img_separacion {
+    height: 5px;
+    visibility: hidden;
+  }
+  #container-buttomgroup {
+    height: 200px;
+    width: 300px;
+    justify-content: space-around;
+    align-content: space-between;
+    margin-left: 0;
+    margin-bottom: 75%;
+  }
+  #container-buttomgroup button {
+    width: 50px;
+    font-size: 0.5rem;
+    margin: 4px 10px;
+  }
+  #btn_ar {
+    top: 0;
+  }
+  #contenedor-especificaciones {
+    width: 250px;
+    height: 50px;
+    position: absolute;
+    top: 36%;
+    left: 40px;
+  }
+  #contenedor-especificaciones button {
+    margin: 0 auto;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    width: 30px;
+    height: 30px;
+  }
+  #surrounding {
+    top: 20%;
+    right: 4%;
+    height: 45px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #screenlabel {
+    top: 2%;
+    right: 26%;
+    height: 55px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #track_pad {
+    top: 2%;
+    right: 2%;
+    height: 55px;
+    width: 160px;
+    font-size: 10.5px;
+  }
+  #wifi {
+    top: 2%;
+    right: 26%;
+    height: 55px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+  #handle {
+    top: 5%;
+    right: 24%;
+    height: 73px;
+    width: 180px;
+    font-size: 10.5px;
+  }
+}
