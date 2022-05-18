@@ -7,7 +7,6 @@ import {CSS3DRenderer, CSS3DObject} from './renderers/CSS3DRenderer.js'
 const scene = new THREE.Scene()
 //const scene2 = new THREE.scene();
 const camera = new THREE.PerspectiveCamera(60, 700 / 700, 3, 1000)
-
 let clock, mixer
 var esto
 let abrir, cerrar, antenas, tablet, cerrar_antenas
@@ -27,7 +26,11 @@ var setear_peso_abrir
 let escala_tiempo
 const container = document.getElementById('container')
 var box_canvas = document.getElementById('cont-canvas')
+
 var canvas = document.getElementById('artifactcanvas')
+
+const ctx = canvas.getContext('2d')
+
 var btn_screen = document.getElementById('btn_screen')
 var img_screen = document.getElementById('btn_screen_imagen')
 function changefondo() {
@@ -49,8 +52,6 @@ renderer.outputEncoding = THREE.sRGBEncoding
 //container.appendChild( renderer.domElement );
 clock = new THREE.Clock()
 
-//funcion de resize canvas
-
 //hdri
 var pmremGenerator = new THREE.PMREMGenerator(renderer)
 pmremGenerator.compileEquirectangularShader()
@@ -67,7 +68,7 @@ efecto.load(
   }
 )
 //fin del hdri
-var posicion = new THREE.Vector3()
+
 var root = new THREE.Object3D()
 scene.add(root)
 const roughnessMipmapper = new RoughnessMipmapper(renderer)
@@ -89,7 +90,6 @@ objeto.load('objetos/OneLaptopPerChild_Laptop.glb', function (gltf) {
   })
   const animations = gltf.animations
   mixer = new THREE.AnimationMixer(esto)
-  console.log(animations)
 
   tablet = mixer.clipAction(animations[0])
   monitor_180turn_a = mixer.clipAction(animations[0])
@@ -392,7 +392,7 @@ function measure() {
       'objetos/OneLaptopPerChild_Laptop_Measurements.glb',
       function (gltf) {
         measure_o = gltf.scene
-        measure_o.scale.set(95, 95, 95)
+        measure_o.scale.set(100, 100, 100)
         measure_o.position.set(0, -5, 1)
         measure_o.rotation.copy(esto.rotation)
         scene.add(measure_o)
@@ -581,6 +581,7 @@ function mostrar_opciones_especs() {
 // quinto_boton_especificaciones.addEventListener('click', camara_info_green_surrounding_bumper);
 //orbit controls
 const controls = new OrbitControls(camera, renderer.domElement)
+controls.enableDamping = true
 //desahabilitar	botones
 btncerrar.disabled = true
 btntablet.disabled = true
@@ -620,9 +621,11 @@ controls.update()
 //luz ambiental
 const luz_ambiental = new THREE.AmbientLight(0x404040, 3)
 scene.add(luz_ambiental)
+
 //imagen de fondo
 var blanco = new THREE.Color(0xffffff)
 const fondo = new THREE.TextureLoader().load('imagenes/fondo-gris.png')
+
 //scene.background = blanco;
 const animate = function () {
   requestAnimationFrame(animate)
@@ -631,7 +634,7 @@ const animate = function () {
   //esto.position.set( Math.sin( elapsed ) * 4, 0, 0 );
   var mixerUpdateDelta = clock.getDelta()
   mixer.update(mixerUpdateDelta)
-  TWEEN.update()
+
   renderer.render(scene, camera)
   //renderdivs.render( scene, camera );
   //render_bottom.render(scene2, camera2);

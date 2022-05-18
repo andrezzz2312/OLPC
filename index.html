@@ -14,7 +14,36 @@
   <body background="imagenes/fondo-a-la-medida.png">
     <div id="container">
       <div id="cont-canvas">
+        <div class="annotation">
+          <p><strong>Cube</strong></p>
+          <p>
+            In geometry, a cube is a three-dimensional solid object bounded by
+            six square faces, facets or sides, with three meeting at each
+            vertex.
+          </p>
+        </div>
         <canvas id="artifactcanvas"></canvas>
+
+        <div class="point point-0">
+          <div class="label">1</div>
+          <div class="text">
+            Front and top screen with HUD aggregating terrain and battle
+            informations.
+          </div>
+        </div>
+        <div class="point point-1">
+          <div class="label">2</div>
+          <div class="text">
+            Ventilation with air purifier and detection of environment toxicity.
+          </div>
+        </div>
+        <div class="point point-2">
+          <div class="label">3</div>
+          <div class="text">
+            Cameras supporting night vision and heat vision with automatic
+            adjustment.
+          </div>
+        </div>
         <div id="screenlabel">
           The Screen can function either
           <br />
@@ -126,5 +155,6 @@
     <script src="./build/three.min.js"></script>
     <script src="./tween/tween.umd.js"></script>
     <script src="./tween/RequestAnimationFrame.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
   </body>
 </html>
