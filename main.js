@@ -3,10 +3,80 @@ import {RGBELoader} from './loaders/RGBELoader.js'
 import {OrbitControls} from './controls/OrbitControls.js'
 import {RoughnessMipmapper} from './utils/RoughnessMipmapper.js'
 import {CSS3DRenderer, CSS3DObject} from './renderers/CSS3DRenderer.js'
+import {GUI} from './libs/lil-gui.module.min.js'
+console.log(GUI)
+const panel = new GUI({width: 250})
+const point1 = panel.addFolder('point 1')
+const point2 = panel.addFolder('point 2')
+const point3 = panel.addFolder('point 3')
+const point4 = panel.addFolder('point 4')
+const point5 = panel.addFolder('point 5')
+
+const settings = {
+  x: 0,
+  y: 0,
+  z: 0,
+  'rotation x': 0,
+  'rotation y': 0,
+  'rotation z': 0,
+  'intensidad ambiental': 0,
+  'intensidad directional': 0,
+}
+point1.add(settings, 'x', -100, 100).onChange(function (value) {
+  points[0].position.x = value
+})
+point1.add(settings, 'y', -100, 100).onChange(function (value) {
+  points[0].position.y = value
+})
+point1.add(settings, 'z', -100, 100).onChange(function (value) {
+  points[0].position.z = value
+})
+point2.add(settings, 'x', -100, 100).onChange(function (value) {
+  points[1].position.x = value
+})
+point2.add(settings, 'y', -100, 100).onChange(function (value) {
+  points[1].position.y = value
+})
+point2.add(settings, 'z', -100, 100).onChange(function (value) {
+  points[1].position.z = value
+})
+point3.add(settings, 'x', -100, 100).onChange(function (value) {
+  points[2].position.x = value
+})
+point3.add(settings, 'y', -100, 100).onChange(function (value) {
+  points[2].position.y = value
+})
+point3.add(settings, 'z', -100, 100).onChange(function (value) {
+  points[2].position.z = value
+})
+point4.add(settings, 'x', -100, 100).onChange(function (value) {
+  points[3].position.x = value
+})
+point4.add(settings, 'y', -100, 100).onChange(function (value) {
+  points[3].position.y = value
+})
+point4.add(settings, 'z', -100, 100).onChange(function (value) {
+  points[3].position.z = value
+})
+point5.add(settings, 'x', -100, 100).onChange(function (value) {
+  points[4].position.x = value
+})
+point5.add(settings, 'y', -100, 100).onChange(function (value) {
+  points[4].position.y = value
+})
+point5.add(settings, 'z', -100, 100).onChange(function (value) {
+  points[4].position.z = value
+})
 
 const scene = new THREE.Scene()
 //const scene2 = new THREE.scene();
-const camera = new THREE.PerspectiveCamera(60, 700 / 700, 3, 1000)
+var box_canvas = document.getElementById('cont-canvas')
+const camera = new THREE.PerspectiveCamera(
+  60,
+  box_canvas.offsetWidth / box_canvas.offsetHeight,
+  3,
+  1000
+)
 let clock, mixer
 var esto
 let abrir, cerrar, antenas, tablet, cerrar_antenas
@@ -25,16 +95,72 @@ var abrirpeso, cerrarpeso, acciones, animations
 var setear_peso_abrir
 let escala_tiempo
 const container = document.getElementById('container')
-var box_canvas = document.getElementById('cont-canvas')
 
 var canvas = document.getElementById('artifactcanvas')
-
-const ctx = canvas.getContext('2d')
-
 var btn_screen = document.getElementById('btn_screen')
 var img_screen = document.getElementById('btn_screen_imagen')
-function changefondo() {
-  img_screen.src = 'imagenes/puntito-verde.png'
+
+/*
+ * Loaders
+ */
+const loadingBarElement = document.querySelector('.loading-bar')
+
+let sceneReady = false
+const loadingManager = new THREE.LoadingManager(
+  // Loaded
+  () => {
+    // Wait a little
+    window.setTimeout(() => {
+      // Animate overlay
+      // gsap.to(overlayMaterial.uniforms.uAlpha, {
+      //   duration: 3,
+      //   value: 0,
+      //   delay: 1,
+      // })
+      // Update loadingBarElement
+      // loadingBarElement.classList.add('ended')
+      // loadingBarElement.style.transform = ''
+    }, 500)
+
+    window.setTimeout(() => {
+      sceneReady = true
+    }, 2000)
+  }
+)
+
+/**
+ * Points of interest
+ */
+const raycaster = new THREE.Raycaster()
+const points = [
+  {
+    position: new THREE.Vector3(1.4, 3, -2.8),
+    element: document.querySelector('.point-0'),
+  },
+  {
+    position: new THREE.Vector3(-4, -8, 8),
+    element: document.querySelector('.point-1'),
+  },
+  {
+    position: new THREE.Vector3(-8, 11, -10),
+    element: document.querySelector('.point-2'),
+  },
+  {
+    position: new THREE.Vector3(5.4, -7, -9.4),
+    element: document.querySelector('.point-3'),
+  },
+  {
+    position: new THREE.Vector3(12.5, -2, 1.7),
+    element: document.querySelector('.point-4'),
+  },
+]
+
+/**
+ * Sizes
+ */
+const sizes = {
+  width: box_canvas.offsetWidth,
+  height: box_canvas.offsetHeight,
 }
 
 const renderer = new THREE.WebGLRenderer({
@@ -43,8 +169,10 @@ const renderer = new THREE.WebGLRenderer({
   antialias: true,
 })
 renderer.setPixelRatio(window.devicePixelRatio)
-renderer.setSize(box_canvas.clientWidth, box_canvas.clientHeight)
-camera.aspect = box_canvas.clientWidth / box_canvas.clientHeight
+
+renderer.setSize(box_canvas.offsetWidth, box_canvas.offsetHeight)
+// renderer.scale.set()
+camera.aspect = box_canvas.offsetWidth / box_canvas.offsetHeight
 camera.updateProjectionMatrix()
 renderer.toneMapping = THREE.ACESFilmicToneMapping
 renderer.toneMappingExposure = 0.4
@@ -69,19 +197,19 @@ efecto.load(
 )
 //fin del hdri
 
-var root = new THREE.Object3D()
-scene.add(root)
+// var root = new THREE.Object3D()
+// scene.add(root)
 const roughnessMipmapper = new RoughnessMipmapper(renderer)
-const objeto = new GLTFLoader()
+const objeto = new GLTFLoader(loadingManager)
 objeto.load('objetos/OneLaptopPerChild_Laptop.glb', function (gltf) {
   esto = gltf.scene
-  esto.position.set(0, -8, 1)
-  esto.scale.set(100, 100, 100)
+  gltf.scene.position.set(0, -8, 1)
+  gltf.scene.scale.set(100, 100, 100)
   //esto.lookAt(0,180.7,0);
   //esto.rotation.set(-30.76,180,6.2);
-  esto.rotation.set(0, 180.2, 0)
-  scene.add(esto)
-  root.add(esto) //nuevo
+  gltf.scene.rotation.set(0, 180.2, 0)
+  scene.add(gltf.scene)
+  // root.add(gltf.scene) //nuevo
   gltf.scene.traverse(function (child) {
     if (child.isMesh) {
       // TOFIX RoughnessMipmapper seems to be broken with WebGL 2.0
@@ -580,7 +708,7 @@ function mostrar_opciones_especs() {
 // cuarto_boton_especificaciones.addEventListener('click', camara_info_handle);
 // quinto_boton_especificaciones.addEventListener('click', camara_info_green_surrounding_bumper);
 //orbit controls
-const controls = new OrbitControls(camera, renderer.domElement)
+const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 //desahabilitar	botones
 btncerrar.disabled = true
@@ -610,9 +738,9 @@ botonar.addEventListener('click', ar)
 //responsive
 window.addEventListener('resize', onWindowResize)
 function onWindowResize() {
-  camera.aspect = box_canvas.clientWidth / box_canvas.clientHeight
+  camera.aspect = box_canvas.offsetWidth / box_canvas.offsetHeight
   camera.updateProjectionMatrix()
-  renderer.setSize(box_canvas.clientWidth, box_canvas.clientHeight)
+  renderer.setSize(box_canvas.offsetWidth, box_canvas.offsetHeight)
 }
 
 camera.position.z = 38
@@ -628,6 +756,48 @@ const fondo = new THREE.TextureLoader().load('imagenes/fondo-gris.png')
 
 //scene.background = blanco;
 const animate = function () {
+  if (sceneReady) {
+    // Go through each point
+    for (const point of points) {
+      // Get 2D screen position
+
+      const screenPosition = point.position.clone()
+      screenPosition.project(camera)
+
+      // Set the raycaster
+      raycaster.setFromCamera(screenPosition, camera)
+      const intersects = raycaster.intersectObjects(scene.children, true)
+
+      // No intersect found
+      if (intersects.length === 0) {
+        // Show
+        point.element.classList.add('visible')
+      }
+
+      // Intersect found
+      else {
+        // Get the distance of the intersection and the distance of the point
+        const intersectionDistance = intersects[0].distance
+        const pointDistance = point.position.distanceTo(camera.position)
+
+        // Intersection is close than the point
+        if (intersectionDistance < pointDistance) {
+          // Hide
+          point.element.classList.remove('visible')
+        }
+        // Intersection is further than the point
+        else {
+          // Show
+          point.element.classList.add('visible')
+        }
+      }
+
+      const translateX = screenPosition.x * sizes.width * 0.5
+      const translateY = -screenPosition.y * sizes.height * 0.5
+      point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
+    }
+  }
+  controls.update()
   requestAnimationFrame(animate)
 
   //const elapsed = clock.getElapsedTime();
