@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
-* {
-  padding: 0;
+
+*,
+::after,
+::before {
   margin: 0;
+  padding: 0;
 }
 html,
 body {
+  box-sizing: border-box;
   height: 100%;
   width: 100%;
 }
@@ -13,7 +17,7 @@ body {
   --border-width: 5px;
   --green-color: #48aabb;
   --gray-color: #9a999e;
-  --font-size: 1.4rem;
+  --font-size: 1rem;
   --font-weight: 600;
   --padding: 4px 30px;
   --width: 260px;
@@ -32,14 +36,9 @@ body {
   border-radius: 50px;
   border: var(--border-width) solid var(--gray-color);
   position: relative;
-  box-sizing: content-box;
-}
-.btnl:disabled {
-  cursor: not-allowed;
-  pointer-events: none;
 }
 
-/* .btnl .point {
+.btnl .point {
   display: inline-block;
   width: calc(var(--border-width) * 2);
   height: calc(var(--border-width) * 2.6);
@@ -49,12 +48,18 @@ body {
   top: 50%;
   left: calc(var(--border-width) * -1.2);
   transform: translate(-50%, -50%);
-} */
+}
+
+.btnl:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .point {
   position: absolute;
   top: 50%;
   left: 35%;
-  /* pointer-events: none; */
+  transition: opacity 0.3s;
 }
 
 .point .label {
@@ -64,18 +69,38 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #00000077;
-  border: 1px solid #ffffff77;
+  background: hsl(252, 3%, 61%);
+  /* border: 1px solid #ffffff77; */
   color: #ffffff;
   font-family: Helvetica, Arial, sans-serif;
   text-align: center;
   line-height: 40px;
   font-weight: 100;
-  font-size: 14px;
+  font-size: 1rem;
   cursor: help;
-  transform: scale(1, 1);
-  opacity: 0.3;
-  transition: transform 0.3s;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: -1;
+}
+
+.inner:hover {
+  animation: glow 1s ease-in-out forwards;
+  filter: blur(1px);
+}
+.inner {
+  aspect-ratio: 1/1;
+  background: hsl(252, 3%, 61%);
+  border-radius: 50%;
+  width: 50%;
+  transform: translate(17%, 17%);
+  border: 5px solid rgb(72, 170, 187);
+}
+.point .label::after {
+  content: '';
+  color: rgb(72, 170, 187);
+  width: 100%;
+  height: auto;
+  background-color: rgb(72, 170, 187);
 }
 
 .point .text {
@@ -83,15 +108,15 @@ body {
   top: 30px;
   left: -120px;
   width: 200px;
-  padding: 20px;
-  border-radius: 4px;
-  background: #00000077;
-  border: 1px solid #ffffff77;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: hsl(252, 3%, 61%);
+  padding: 1rem 2rem 1rem 2rem;
   color: #ffffff;
   line-height: 1.3em;
   font-family: Helvetica, Arial, sans-serif;
   font-weight: 100;
-  font-size: 14px;
+  font-size: 1rem;
   opacity: 0;
   transition: opacity 0.3s;
   pointer-events: none;
@@ -102,8 +127,7 @@ body {
 }
 
 .point.visible .label {
-  /* transform: scale(1, 1); */
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 /****** regular Button ******/
@@ -289,202 +313,72 @@ body {
   box-shadow: inset 4px 4px 0px 1px rgba(14, 8, 8, 0.4);
 }
 
-/*@media (min-width: 415.5px) {
-  
-  :root {
-    --width : 90px; 
-    --font-size: 0.9rem; 
-
-  }
-  
-}   */
-
-/*@media (max-width: 568px) {
-  
-  :root {
-    --width : 110px; 
-    --font-size: 0.5rem; 
-
-  }
-  
-}  */
-
-/*@media (max-width: 415px) {
-  :root {
-    --width : 60px; 
-    --font-size: 0.7rem; 
-  } 
-
-}  */
-
-#card {
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0rem 3rem 0rem 3rem;
+  border-radius: 50px;
+  gap: 5%;
+  height: 50%;
+  background-color: #fff;
+}
+.grow {
+  animation: grow ease-in-out 1s;
+}
+.modal {
   visibility: hidden;
   position: absolute;
   display: flex;
-  width: 400px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
   flex-direction: column;
-  top: 200px;
+  left: 0;
+  top: 0;
   z-index: 1;
+
+  background-color: hsla(185, 100%, 40%, 0.47);
 }
 #qr {
-  width: 100%;
-  height: auto;
+  max-width: 70%;
+  max-height: 70%;
 }
 #view_in_your_space {
   text-align: center;
   font-family: Poppins;
-  background-color: var(--gray-color);
   font-size: 1.2rem;
-}
-
-#screenlabel {
-  text-align: justify;
-  height: 165px;
-  width: 450px;
-  color: #fff;
-  padding: 50px 25px;
-  font-size: 27px;
-  position: absolute;
-  top: 3%;
-  font-family: Poppins;
-  background-color: var(--gray-color);
-  border-radius: 20px;
-  visibility: hidden;
-  opacity: 0.9;
-}
-#track_pad {
-  text-align: justify;
-  height: 165px;
-  width: 450px;
-  color: #fff;
-  padding: 30px 25px;
-  font-size: 27px;
-  position: absolute;
-  top: 2%;
-  right: 52%;
-  font-family: Poppins;
-  background-color: var(--gray-color);
-  border-radius: 20px;
-  visibility: hidden;
-  opacity: 0.9;
-}
-#wifi {
-  text-align: justify;
-  height: 165px;
-  width: 450px;
-  color: #fff;
-  padding: 30px 25px;
-  font-size: 27px;
-  position: absolute;
-  top: 2%;
-  right: 65%;
-  font-family: Poppins;
-  background-color: var(--gray-color);
-  border-radius: 20px;
-  visibility: hidden;
-  opacity: 0.9;
-}
-
-#handle {
-  text-align: justify;
-  height: 165px;
-  width: 450px;
-  color: #fff;
-  padding: 30px 25px;
-  font-size: 27px;
-  position: absolute;
-  top: 5%;
-  right: 60%;
-  font-family: Poppins;
-  background-color: var(--gray-color);
-  border-radius: 20px;
-  opacity: 0.9;
-  visibility: hidden;
-}
-
-#surrounding {
-  text-align: justify;
-  height: 165px;
-  width: 450px;
-  color: #fff;
-  padding: 30px 25px;
-  font-size: 27px;
-  position: absolute;
-  top: 40%;
-  right: 51%;
-  font-family: Poppins;
-  background-color: var(--gray-color);
-  border-radius: 10px;
-  opacity: 0.9;
-  visibility: hidden;
 }
 
 /*inicio de responsive*/
 #container {
   display: flex;
   flex-direction: row;
-  /* flex-wrap: wrap; */
   justify-content: center;
   align-items: center;
-
   height: 100%;
   width: 100%;
 }
 #cont-canvas {
   width: 70%;
-
   height: 100%;
 }
 #artifactcanvas {
   width: 100%;
-
   height: 100%;
 }
-#container-buttomgroup {
-}
-#separacion {
-  height: 560px;
-  margin-top: 80px;
-}
-#img_separacion {
-  height: 560px;
-}
-#container-buttomgroup {
-  height: 650px;
-  width: 30%;
 
+#container-buttongroup {
+  height: 100%;
+  width: 30%;
   align-content: center;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
-  margin-left: 20px;
-}
-#btn_ar {
-  top: 70px;
 }
 
-#contenedor-especificaciones {
-  width: 550px;
-  height: 70px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  visibility: hidden;
-  position: relative;
-  left: -380px;
-  top: -165px;
-}
-#contenedor-especificaciones button {
-  margin: 0 auto;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 50px;
-  width: 50px;
-  height: 50px;
-}
 /*botones de especificaciones*/
 #btn_screen {
   text-align: center;
@@ -527,958 +421,51 @@ body {
 #surrounding {
   visibility: hidden;
 }
-/*laptop*/
-@media only screen and (max-device-width: 1366px) {
-  /* #cont-canvas {
-    width: 490px;
 
-    margin-top: 20px;
-    height: 450px;
-  } */
-  #separacion {
-    height: 520px;
-    margin-top: 30px;
+@keyframes grow {
+  0% {
+    transform: scale(0);
   }
-  #img_separacion {
-    height: 520px;
+  100% {
+    transform: scale(1);
   }
-  #container-buttomgroup {
-    height: 550px;
-    width: 333px;
-    margin-top: 30px;
+}
+@keyframes glow {
+  0% {
+    border: 5px solid rgb(72, 170, 187);
+
+    box-shadow: none;
+  }
+  100% {
+    border: 5px solid #fff;
+
+    box-shadow: 0 0 2px rgb(72, 170, 187), 0 0 4px rgb(72, 170, 187),
+      0 0 7px rgb(72, 170, 187), 0 0 12px rgb(72, 170, 187);
+  }
+}
+
+@media (max-width: 550px) and (orientation: portrait) {
+  #container {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  #cont-canvas {
+    width: 100%;
+    height: auto;
+  }
+  #container-buttongroup {
+    height: 100%;
+    width: 100%;
     align-content: center;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-left: 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
   }
-  #btn_ar {
-    top: 40px;
-  }
-  #contenedor-especificaciones {
-    position: relative;
-    left: -330px;
-    top: -21%;
-  }
-  /*textos de informacion ancho 1300px*/
-  #screenlabel {
-    text-align: justify;
-    height: 125px;
-    width: 350px;
-    color: #fff;
-    padding: 25px 25px;
-    font-size: 20px;
+  .point {
     position: absolute;
-    top: 3%;
-    font-family: Poppins;
-    background-color: var(--gray-color);
-    border-radius: 20px;
-    visibility: hidden;
-    opacity: 0.9;
-  }
-  #track_pad {
-    text-align: justify;
-    height: 125px;
-    width: 350px;
-    color: #fff;
-    padding: 25px 25px;
-    font-size: 20px;
-    position: absolute;
-    top: 2%;
-    right: 52%;
-    font-family: Poppins;
-    background-color: var(--gray-color);
-    border-radius: 20px;
-    visibility: hidden;
-    opacity: 0.9;
-  }
-  #wifi {
-    text-align: justify;
-    height: 125px;
-    width: 350px;
-    color: #fff;
-    padding: 25px 25px;
-    font-size: 20px;
-    position: absolute;
-    top: 2%;
-    right: 65%;
-    font-family: Poppins;
-    background-color: var(--gray-color);
-    border-radius: 20px;
-    visibility: hidden;
-    opacity: 0.9;
-  }
-
-  #handle {
-    text-align: justify;
-    height: 145px;
-    width: 350px;
-    color: #fff;
-    padding: 25px 25px;
-    font-size: 20px;
-    position: absolute;
-    top: 5%;
-    right: 60%;
-    font-family: Poppins;
-    background-color: var(--gray-color);
-    border-radius: 20px;
-    opacity: 0.9;
-    visibility: hidden;
-  }
-
-  #surrounding {
-    text-align: justify;
-    height: 95px;
-    width: 320px;
-    color: #fff;
-    padding: 25px 25px;
-    font-size: 20px;
-    position: absolute;
-    top: 45%;
-    right: 51%;
-    font-family: Poppins;
-    background-color: var(--gray-color);
-    border-radius: 10px;
-    opacity: 0.9;
-    visibility: hidden;
-  }
-  #card {
-    top: 50px;
-    z-index: 1;
-  }
-}
-/*tablet max 1023*/
-@media only screen and (min-device-width: 769.5px) and (max-device-width: 1024px) {
-  #contenedor-especificaciones {
-    left: -270px;
-    width: 450px;
-  }
-  #wifi {
-    top: 2%;
-    right: 60%;
-  }
-  #surrounding {
     top: 15%;
-    right: 52%;
-  }
-}
-@media only screen and (min-device-width: 768px) and (max-device-width: 769px) {
-  #separacion {
-    height: 420px;
-    margin-top: 30px;
-  }
-  #img_separacion {
-    height: 420px;
-    visibility: hidden;
-  }
-  #container-buttomgroup {
-    height: 330px;
-    width: 690px;
-    margin-left: 0;
-    align-content: space-between;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 50px;
-  }
-  #container-buttomgroup button {
-    width: 220px;
-    font-size: 0.9rem;
-    margin: 4px 10px;
-    height: 70px;
-  }
-  #btn_ar {
-    top: 0;
-  }
-  #contenedor-especificaciones {
-    width: 450px;
-    height: 70px;
-    left: 0;
-    top: -450px;
-    justify-content: space-around;
-  }
-  #wifi {
-    top: 2%;
-    right: 45%;
-  }
-  #surrounding {
-    top: 31%;
-    right: 20%;
-  }
-  #handle {
-    top: 5%;
-    right: 40%;
-  }
-  #track_pad {
-    top: 2%;
-    right: 12%;
-  }
-}
-/*celulares grandes horizontal*/
-@media only screen and (min-device-width: 731px) and (max-device-width: 736px) {
-  /* #cont-canvas {
-    width: 290px;
-    margin-top: 10px;
-    height: 250px;
-  } */
-  #separacion {
-    height: 220px;
-    margin-top: 30px;
-  }
-  #img_separacion {
-    height: 220px;
-  }
-  #container-buttomgroup {
-    height: 220px;
-    width: 190px;
-    margin-left: 30px;
-  }
-  #container-buttomgroup button {
-    width: 80px;
-    font-size: 0.5rem;
-    margin: 4px 10px;
-  }
-  #btn_ar {
-    top: 15px;
-  }
-  #contenedor-especificaciones {
-    width: 250px;
-    height: 50px;
-    left: -120px;
-    top: -90px;
-  }
-  #contenedor-especificaciones button {
-    margin: 0 auto;
-    margin: 10px;
-    padding: 5px;
-    border-radius: 20px;
-    width: 30px;
-    height: 30px;
-  }
-  #screenlabel {
-    top: 2%;
-    right: 58%;
-    height: 75px;
-    width: 160px;
-    font-size: 10px;
-  }
-  #track_pad {
-    top: 2%;
-    right: 46%;
-    height: 65px;
-    width: 160px;
-    font-size: 10px;
-  }
-  #wifi {
-    top: 2%;
-    right: 58%;
-    height: 65px;
-    width: 160px;
-    font-size: 10px;
-  }
-  #handle {
-    top: 5%;
-    right: 58%;
-    height: 75px;
-    width: 160px;
-    font-size: 10px;
-  }
-  #surrounding {
-    top: 32%;
-    right: 46%;
-    height: 45px;
-    width: 160px;
-    font-size: 10px;
-  }
-}
-
-@media screen and (min-width: 899px) and (max-width: 999px) {
-  /* #cont-canvas {
-    width: 400px;
-    margin-top: 20px;
-    height: 290px;
-  } */
-  #container-buttomgroup {
-    height: 290px;
-    width: 190px;
-    margin-left: 30px;
-    margin-top: 10px;
-    margin-right: 113px;
-  }
-  #container-buttomgroup button {
-    width: 80px;
-    font-size: 0.5rem;
-    margin: 4px 10px;
-  }
-  #img_separacion {
-    height: 245px;
-  }
-  #separacion {
-    height: 245px;
-    margin-top: 30px;
-  }
-  #contenedor-especificaciones {
-    left: -200px;
-    top: -90px;
-    width: 450px;
-  }
-  #contenedor-especificaciones button {
-    margin: 0 auto;
-    margin: 10px;
-    padding: 5px;
-    border-radius: 20px;
-    width: 30px;
-    height: 30px;
-  }
-}
-@media screen and (min-width: 824px) and (max-width: 896px) {
-  /* #cont-canvas {
-    width: 400px;
-    margin-top: 10px;
-    height: 290px;
-  } */
-  #separacion {
-    height: 245px;
-    margin-top: 30px;
-  }
-  #img_separacion {
-    height: 245px;
-  }
-  #container-buttomgroup {
-    height: 290px;
-    width: 190px;
-    margin-left: 30px;
-    margin-top: 10px;
-    margin-right: 113px;
-  }
-  #container-buttomgroup button {
-    width: 80px;
-    font-size: 0.5rem;
-    margin: 4px 10px;
-  }
-  #btn_ar {
-    top: 15px;
-  }
-  #contenedor-especificaciones {
-    width: 250px;
-    height: 50px;
-    left: -170px;
-    top: -30%;
-  }
-  #contenedor-especificaciones button {
-    margin: 0 auto;
-    margin: 10px;
-    padding: 5px;
-    border-radius: 20px;
-    width: 30px;
-    height: 30px;
-  }
-  #screenlabel {
-    top: 2%;
-    right: 58%;
-    height: 75px;
-    width: 200px;
-    font-size: 12px;
-  }
-  #wifi {
-    top: 2%;
-    right: 58%;
-    height: 65px;
-    width: 200px;
-    font-size: 12px;
-  }
-  #surrounding {
-    top: 18%;
-    right: 47%;
-    height: 55px;
-    width: 200px;
-    font-size: 12px;
-  }
-  #handle {
-    top: 5%;
-    right: 62%;
-    height: 85px;
-    width: 180px;
-    font-size: 12px;
-  }
-  #track_pad {
-    top: 4%;
-    right: 47%;
-    height: 65px;
-    width: 180px;
-    font-size: 12px;
-  }
-}
-@media screen and (min-width: 812px) and (max-width: 823px) {
-  /* #cont-canvas {
-    width: 400px;
-    margin-top: 10px;
-    height: 290px;
-  } */
-  #separacion {
-    height: 245px;
-    margin-top: 30px;
-  }
-  #img_separacion {
-    height: 245px;
-  }
-  #container-buttomgroup {
-    height: 290px;
-    width: 190px;
-    margin-left: 30px;
-    margin-top: 10px;
-    margin-right: 113px;
-  }
-  #container-buttomgroup button {
-    width: 80px;
-    font-size: 0.5rem;
-    margin: 4px 10px;
-  }
-  #btn_ar {
-    top: 15px;
-  }
-  #contenedor-especificaciones {
-    width: 250px;
-    height: 50px;
-    left: -170px;
-    top: -35%;
-  }
-  #contenedor-especificaciones button {
-    margin: 0 auto;
-    margin: 10px;
-    padding: 5px;
-    border-radius: 20px;
-    width: 30px;
-    height: 30px;
-  }
-  #screenlabel {
-    top: 2%;
-    right: 58%;
-    height: 75px;
-    width: 200px;
-    font-size: 12px;
-  }
-  #wifi {
-    top: 2%;
-    right: 58%;
-    height: 65px;
-    width: 200px;
-    font-size: 12px;
-  }
-  #surrounding {
-    top: 10%;
-    right: 47%;
-    height: 55px;
-    width: 200px;
-    font-size: 12px;
-  }
-  #handle {
-    top: 5%;
-    right: 62%;
-    height: 85px;
-    width: 180px;
-    font-size: 12px;
-  }
-  #track_pad {
-    top: 4%;
-    right: 47%;
-    height: 65px;
-    width: 180px;
-    font-size: 12px;
-  }
-}
-
-@media screen and (min-device-width: 666px) and (max-device-width: 667.5px) {
-  /* #cont-canvas {
-    width: 250px;
-    height: 250px;
-  } */
-  /* #artifactcanvas {
-    width: 250px;
-    height: 250px;
-  } */
-  #separacion {
-    height: 230px;
-    margin-top: 30px;
-  }
-  #img_separacion {
-    height: 230px;
-  }
-  #container-buttomgroup {
-    height: 250px;
-    width: 190px;
-  }
-  #container-buttomgroup button {
-    width: 130px;
-    font-size: 0.5rem;
-    margin: 4px 10px;
-  }
-  #contenedor-especificaciones {
-    position: absolute;
-    width: 250px;
-    height: 50px;
-    left: 80px;
-    top: 230px;
-  }
-  #contenedor-especificaciones button {
-    margin: 0 auto;
-    margin: 10px;
-    padding: 5px;
-    border-radius: 20px;
-    width: 30px;
-    height: 30px;
-  }
-  #btn_ar {
-    top: 15px;
-  }
-  #surrounding {
-    top: 15%;
-    right: 46%;
-    height: 45px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #screenlabel {
-    top: 2%;
-    right: 55%;
-    height: 60px;
-    width: 200px;
-    font-size: 10.5px;
-  }
-  #track_pad {
-    top: 2%;
-    right: 45%;
-    height: 55px;
-    width: 160px;
-    font-size: 10.5px;
-  }
-  #wifi {
-    top: 2%;
-    right: 58%;
-    height: 60px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #handle {
-    top: 5%;
-    right: 58%;
-    height: 60px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-}
-
-/*celular pequeno horizontal*/
-@media only screen and (min-device-width: 568px) and (max-device-width: 665px) {
-  /* #cont-canvas {
-    width: 290px;
-    margin-top: 10px;
-    height: 250px;
-  } */
-  #separacion {
-    height: 220px;
-    margin-top: 30px;
-  }
-  #img_separacion {
-    height: 220px;
-  }
-  #container-buttomgroup {
-    height: 220px;
-    width: 190px;
-    margin-left: 30px;
-  }
-  #container-buttomgroup button {
-    width: 80px;
-    font-size: 0.5rem;
-    margin: 4px 10px;
-  }
-  #btn_ar {
-    top: 15px;
-  }
-  #contenedor-especificaciones {
-    width: 250px;
-    height: 50px;
-    left: -120px;
-    top: -32%;
-  }
-  #contenedor-especificaciones button {
-    margin: 0 auto;
-    margin: 10px;
-    padding: 5px;
-    border-radius: 20px;
-    width: 30px;
-    height: 30px;
-  }
-  #surrounding {
-    top: 10%;
-    right: 46%;
-    height: 45px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #screenlabel {
-    top: 2%;
-    right: 55%;
-    height: 60px;
-    width: 200px;
-    font-size: 10.5px;
-  }
-  #track_pad {
-    top: 2%;
-    right: 45%;
-    height: 55px;
-    width: 160px;
-    font-size: 10.5px;
-  }
-  #wifi {
-    top: 2%;
-    right: 58%;
-    height: 60px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #handle {
-    top: 5%;
-    right: 58%;
-    height: 60px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-}
-/*celulares de tamano mas alto vertical*/
-@media only screen and (min-device-width: 376px) and (max-device-width: 462px) and (orientation: portrait) {
-  #surrounding {
-    top: 25%;
-    right: 1%;
-    height: 57px;
-    width: 208px;
-    font-size: 13px;
-  }
-  #screenlabel {
-    top: 2%;
-    right: 35%;
-    height: 88px;
-    width: 216px;
-    font-size: 13px;
-  }
-  #track_pad {
-    top: 6%;
-    right: 10%;
-    height: 88px;
-    width: 216px;
-    font-size: 13px;
-  }
-  #wifi {
-    top: 2%;
-    right: 35%;
-    height: 88px;
-    width: 216px;
-    font-size: 13px;
-  }
-  #handle {
-    top: 5%;
-    right: 34%;
-    height: 88px;
-    width: 216px;
-    font-size: 13px;
-  }
-  /* #cont-canvas {
-    width: 350px;
-    margin-top: 10px;
-    height: 350px;
-  } */
-  #separacion {
-    /*height: 220px; 
-  margin-top: 30px;*/
-    /*height: 5px;*/
-    display: none;
-  }
-  #img_separacion {
-    height: 5px;
-    display: none;
-  }
-  #container-buttomgroup {
-    height: 250px;
-    width: 390px;
-    margin-left: 0;
-    justify-content: space-around;
-    align-content: space-between;
-  }
-  #container-buttomgroup button {
-    width: 80px;
-    font-size: 0.75rem;
-    margin: 4px 10px;
-    height: 50px;
-  }
-  #btn_ar {
-    top: 0;
-  }
-  #contenedor-especificaciones {
-    width: 250px;
-    height: 50px;
-    left: 0;
-    top: -44%;
-  }
-  #contenedor-especificaciones button {
-    margin: 0 auto;
-    margin: 10px;
-    padding: 5px;
-    border-radius: 20px;
-    width: 30px;
-    height: 30px;
-  }
-}
-/*-----------------------------------*/
-@media only screen and (min-device-width: 374px) and (max-device-width: 375.5px) {
-  /* #cont-canvas {
-    width: 350px;
-    margin-top: 10px;
-    height: 350px;
-  } */
-  #separacion {
-    height: 5px;
-    margin-top: 10px;
-  }
-  #img_separacion {
-    height: 5px;
-    visibility: hidden;
-  }
-  #container-buttomgroup {
-    height: 250px;
-    width: 350px;
-    justify-content: space-around;
-    align-content: space-between;
-    margin: 0;
-  }
-  #container-buttomgroup button {
-    width: 80px;
-    font-size: 0.5rem;
-    margin: 4px 10px;
-    height: 50px;
-  }
-  #btn_ar {
-    top: 0;
-  }
-  #contenedor-especificaciones {
-    width: 250px;
-    height: 50px;
-    left: 10px;
-    top: -380px;
-  }
-  #screenlabel {
-    top: 2%;
-    right: 35%;
-    height: 75px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #surrounding {
-    top: 25%;
-    right: 1%;
-    height: 45px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #track_pad {
-    top: 6%;
-    right: 10%;
-    height: 75px;
-    width: 160px;
-    font-size: 10.5px;
-  }
-
-  #wifi {
-    top: 2%;
-    right: 35%;
-    height: 75px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #handle {
-    top: 5%;
-    right: 34%;
-    height: 75px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #contenedor-especificaciones button {
-    margin: 0 auto;
-    margin: 10px;
-    padding: 5px;
-    border-radius: 20px;
-    width: 30px;
-    height: 30px;
-  }
-}
-/*---------------------------*/
-/*celular pequeno vertical*/
-@media only screen and (min-device-width: 359px) and (max-device-width: 360px) {
-  /* #cont-canvas {
-    width: 340px;
-    height: 340px;
-    margin-top: 10px;
-  } */
-  #separacion {
-    height: 5px;
-    margin-top: 10px;
-  }
-  #img_separacion {
-    height: 5px;
-    visibility: hidden;
-  }
-  #container-buttomgroup {
-    height: 250px;
-    width: 340px;
-    justify-content: space-around;
-    align-content: space-between;
-    margin-left: 0;
-    margin-top: 0;
-    margin-bottom: 85%;
-  }
-  #container-buttomgroup button {
-    width: 80px;
-    font-size: 0.5rem;
-    margin: 4px 10px;
-    height: 50px;
-  }
-  #btn_ar {
-    top: 0;
-  }
-  #contenedor-especificaciones {
-    width: 250px;
-    height: 50px;
-    position: absolute;
-    left: 17%;
-    top: 32%;
-  }
-  #contenedor-especificaciones button {
-    margin: 0 auto;
-    margin: 10px;
-    padding: 5px;
-    border-radius: 20px;
-    width: 30px;
-    height: 30px;
-  }
-  #surrounding {
-    top: 25%;
-    right: 1%;
-    height: 45px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #screenlabel {
-    top: 2%;
-    right: 35%;
-    height: 55px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #track_pad {
-    top: 6%;
-    right: 10%;
-    height: 55px;
-    width: 160px;
-    font-size: 10.5px;
-  }
-  #wifi {
-    top: 2%;
-    right: 35%;
-    height: 55px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #handle {
-    top: 5%;
-    right: 34%;
-    height: 60px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-}
-/*celular pequeno vertical*/
-@media only screen and (min-device-width: 320px) and (max-device-width: 320.5px) {
-  #container {
-    justify-content: flex-end;
-  }
-  /* #cont-canvas {
-    width: 300px;
-    height: 300px;
-    margin-top: 10px;
-  } */
-  #separacion {
-    height: 5px;
-    margin-top: 10px;
-  }
-  #img_separacion {
-    height: 5px;
-    visibility: hidden;
-  }
-  #container-buttomgroup {
-    height: 200px;
-    width: 300px;
-    justify-content: space-around;
-    align-content: space-between;
-    margin-left: 0;
-    margin-bottom: 75%;
-  }
-  #container-buttomgroup button {
-    width: 50px;
-    font-size: 0.5rem;
-    margin: 4px 10px;
-  }
-  #btn_ar {
-    top: 0;
-  }
-  #contenedor-especificaciones {
-    width: 250px;
-    height: 50px;
-    position: absolute;
-    top: 36%;
-    left: 40px;
-  }
-  #contenedor-especificaciones button {
-    margin: 0 auto;
-    margin: 10px;
-    padding: 5px;
-    border-radius: 20px;
-    width: 30px;
-    height: 30px;
-  }
-  #surrounding {
-    top: 20%;
-    right: 4%;
-    height: 45px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #screenlabel {
-    top: 2%;
-    right: 26%;
-    height: 55px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #track_pad {
-    top: 2%;
-    right: 2%;
-    height: 55px;
-    width: 160px;
-    font-size: 10.5px;
-  }
-  #wifi {
-    top: 2%;
-    right: 26%;
-    height: 55px;
-    width: 180px;
-    font-size: 10.5px;
-  }
-  #handle {
-    top: 5%;
-    right: 24%;
-    height: 73px;
-    width: 180px;
-    font-size: 10.5px;
+    left: 50%;
+    transition: opacity 0.3s;
   }
 }

@@ -13,35 +13,39 @@
   </head>
   <body background="imagenes/fondo-a-la-medida.png">
     <div class="point point-0">
-      <div class="label">1</div>
+      <div class="label">
+        <div class="inner"></div>
+      </div>
       <div class="text">
         The Screen can function either as a full-color display or in high-
         contrast black-and-white, for legibility in strong sunlight.
       </div>
     </div>
     <div class="point point-1">
-      <div class="label">2</div>
+      <div class="label">
+        <div class="inner"></div>
+      </div>
       <div class="text">
         The wide track-pad doubles a drawing or stencil tablet so can use it to
         practice out letters by hand.
       </div>
     </div>
     <div class="point point-2">
-      <div class="label">3</div>
+      <div class="label"><div class="inner"></div></div>
       <div class="text">
         Wi-Fi antennae (with a half range) also serve as covers thre laptop´s
         USB ports and latches to close the clamshell.
       </div>
     </div>
     <div class="point point-3">
-      <div class="label">4</div>
+      <div class="label"><div class="inner"></div></div>
       <div class="text">
         The handle can also be a anchor, The machine´s green-and-white scheme is
         taken from Nigerian flag.
       </div>
     </div>
     <div class="point point-4">
-      <div class="label">5</div>
+      <div class="label"><div class="inner"></div></div>
       <div class="text">
         The green surrounding bumper as a seal to protect the device from dust,
         sand, and dirt.
@@ -50,55 +54,9 @@
     <div id="container">
       <div id="cont-canvas">
         <canvas id="artifactcanvas"></canvas>
-
-        <div id="screenlabel">
-          The Screen can function either
-          <br />
-          as a full-color display or in high-
-          <br />
-          contrast black-and-white, for
-          <br />
-          legibility in strong sunlight.
-        </div>
-        <div id="wifi">
-          Wi-Fi antennae (with a half
-          <br />
-          range) also serve as covers
-          <br />
-          thre laptop´s USB ports and
-          <br />
-          latches to close the clamshell.
-        </div>
-        <div id="track_pad">
-          The wide track-pad doubles
-          <br />
-          a drawing or stencil tablet so
-          <br />
-          can use it to practice
-          <br />
-          out letters by hand.
-        </div>
-        <div id="handle">
-          The handle can also be a
-          <br />
-          anchor, The
-          <br />
-          machine´s green-and-white
-          <br />
-          scheme is taken from Nigerian flag.
-        </div>
-        <div id="surrounding">
-          The green surrounding bumper
-          <br />
-          as a seal to protect the device
-          <br />
-          from dust, sand, and dirt.
-        </div>
       </div>
-      <!-- <div id="separacion">
-        <img id="img_separacion" src="imagenes/rayita-blanca.png" />
-      </div> -->
-      <div id="container-buttomgroup">
+
+      <div id="container-buttongroup">
         <button id="boton_abrir" class="btnl">
           <span class="topBorder"></span>
           <span class="rightCorner"></span>
@@ -106,13 +64,7 @@
           <span class="wave"></span>
           Open Laptop
         </button>
-        <button id="boton_measure" class="btnl">
-          <span class="topBorder"></span>
-          <span class="rightCorner"></span>
-          <span class="point"></span>
-          <span class="wave"></span>
-          Measurements
-        </button>
+
         <button id="boton_specifications" class="btnl">
           <span class="topBorder"></span>
           <span class="rightCorner"></span>
@@ -146,16 +98,12 @@
           <span class="text">Augmented Reality</span>
         </button>
       </div>
-      <!-- <div id="contenedor-especificaciones"> 
-					<button id="btn_screen" class="opciones">1</button> 
-					<button id="btn_wifi" class="opciones">2</button> 
-					<button id="btn_track_pad" class="opciones">3</button> 
-					<button id="btn_handle" class="opciones">4</button> 
-					<button id="btn_surrounding" class="opciones">5</button>
-				</div>	  -->
-      <div id="card">
-        <img id="qr" src="imagenes/qr.png" />
-        <span id="view_in_your_space">Scan and View in your Space</span>
+      <div class="modal">
+        <div class="card">
+          <img id="qr" src="imagenes/qr.png" />
+
+          <span id="view_in_your_space">Scan and View in your Space</span>
+        </div>
       </div>
     </div>
     <script type="module" src="./main.js"></script>
