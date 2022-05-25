@@ -17,14 +17,14 @@ body {
   --border-width: 5px;
   --green-color: #48aabb;
   --gray-color: #9a999e;
-  --font-size: 1rem;
+  --font-size: 1.7rem;
   --font-weight: 600;
   --padding: 4px 30px;
   --width: 260px;
 }
 
 .btnl {
-  width: 15rem;
+  width: 25rem;
   margin: 15px;
   font-size: var(--font-size);
   font-weight: var(--font-weight);
@@ -467,5 +467,9 @@ body {
     top: 15%;
     left: 50%;
     transition: opacity 0.3s;
+  }
+  .btnl {
+    font-size: 1.4rem;
+    width: 17rem;
   }
 }
