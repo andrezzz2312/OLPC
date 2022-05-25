@@ -24,7 +24,7 @@ body {
 }
 
 .btnl {
-  width: var(--width);
+  width: 15rem;
   margin: 15px;
   font-size: var(--font-size);
   font-weight: var(--font-weight);
@@ -362,7 +362,7 @@ body {
   width: 100%;
 }
 #cont-canvas {
-  width: 70%;
+  width: 60%;
   height: 100%;
 }
 #artifactcanvas {
@@ -372,11 +372,12 @@ body {
 
 #container-buttongroup {
   height: 100%;
-  width: 30%;
-  align-content: center;
+  width: 40%;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 /*botones de especificaciones*/
