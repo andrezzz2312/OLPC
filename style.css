@@ -382,7 +382,7 @@ body {
 #container-buttongroup {
   height: 100%;
   width: 40%;
-  gap: 3%;
+  gap: 0.7rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -465,6 +465,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    gap: 0.7rem;
   }
   .point {
     position: absolute;
