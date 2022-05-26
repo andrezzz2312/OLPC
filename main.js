@@ -404,14 +404,17 @@ function ar() {
   if (mostrar_qr == false) {
     modal.style.visibility = 'visible'
     card.classList.toggle('grow')
+    card.classList.remove('shrink')
 
     mostrar_qr = true
-  } else if (screen.width < 1200) {
-    window.location = 'https://wireframereality.com/laptop/qr/'
   } else {
     card.classList.toggle('grow')
+    card.classList.toggle('shrink')
+
     mostrar_qr = false
-    modal.style.visibility = 'hidden'
+    setTimeout(() => {
+      modal.style.visibility = 'hidden'
+    }, 1000)
   }
   /*else if( isMobile.iOS() ) window.location="https://wireframereality.com/laptop/qr/"; 
     else if( isMobile.Android() ) window.location="https://titanium-ninth-oregano.glitch.me";  
@@ -428,6 +431,10 @@ function ar() {
 		
 	}*/
 }
+function qr() {
+  window.location = 'https://wireframereality.com/laptop/qr/'
+}
+card.addEventListener('click', qr)
 //evento measure
 let measure_o
 function measure() {
@@ -516,6 +523,8 @@ function mostrar_opciones_especs() {
     mostrar_especificaciones = false
     btntablet.disabled = false
     btntablet.style.opacity = 1
+    btncerrar.disabled = false
+    btncerrar.style.opacity = 1
   }
 }
 //scene.background = blanco;

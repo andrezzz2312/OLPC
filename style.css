@@ -25,7 +25,7 @@ body {
 
 .btnl {
   width: 25rem;
-  margin: 15px;
+
   font-size: var(--font-size);
   font-weight: var(--font-weight);
   cursor: pointer;
@@ -70,7 +70,6 @@ body {
   height: 40px;
   border-radius: 50%;
   background: hsl(252, 3%, 61%);
-  /* border: 1px solid #ffffff77; */
   color: #ffffff;
   font-family: Helvetica, Arial, sans-serif;
   text-align: center;
@@ -84,7 +83,9 @@ body {
 }
 
 .inner:hover {
-  animation: glow 1s ease-in-out forwards;
+  border: 5px solid #fff;
+  box-shadow: 0 0 2px rgb(72, 170, 187), 0 0 4px rgb(72, 170, 187),
+    0 0 7px rgb(72, 170, 187), 0 0 12px rgb(72, 170, 187);
   filter: blur(1px);
 }
 .inner {
@@ -94,6 +95,8 @@ body {
   width: 50%;
   transform: translate(17%, 17%);
   border: 5px solid rgb(72, 170, 187);
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 .point .label::after {
   content: '';
@@ -267,14 +270,14 @@ body {
 }
 
 .btnl.rainbow:hover {
-  border-color: var(--gray-color);
+  border-color: var(var(--green-color));
   transition: border-color linear 1s, box-shadow linear 1s;
-  background-color: var(--gray-color);
-  box-shadow: inset 30px 30px var(--gray-color);
+  background-color: var(var(--green-color));
+  box-shadow: inset 30px 30px var(var(--green-color));
 }
 
 .btnl.rainbow:hover .layers {
-  background-color: var(--gray-color);
+  background-color: var(--green-color);
 }
 
 .btnl.rainbow:hover .layer {
@@ -282,7 +285,7 @@ body {
 }
 
 .btnl.rainbow:hover .point {
-  background-color: var(--gray-color);
+  background-color: var(--green-color);
   transition: background-color linear 1s;
 }
 
@@ -322,10 +325,16 @@ body {
   border-radius: 50px;
   gap: 5%;
   height: 50%;
+  cursor: pointer;
   background-color: #fff;
+  transition: all 0.5s ease-in-out;
+  transform: scale(0);
 }
 .grow {
-  animation: grow ease-in-out 1s;
+  transform: scale(1);
+}
+.shrink {
+  transform: scale(0);
 }
 .modal {
   visibility: hidden;
@@ -373,7 +382,7 @@ body {
 #container-buttongroup {
   height: 100%;
   width: 40%;
-
+  gap: 3%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -431,17 +440,12 @@ body {
     transform: scale(1);
   }
 }
-@keyframes glow {
-  0% {
-    border: 5px solid rgb(72, 170, 187);
-
-    box-shadow: none;
-  }
+@keyframes shrink {
   100% {
-    border: 5px solid #fff;
-
-    box-shadow: 0 0 2px rgb(72, 170, 187), 0 0 4px rgb(72, 170, 187),
-      0 0 7px rgb(72, 170, 187), 0 0 12px rgb(72, 170, 187);
+    transform: scale(0);
+  }
+  0% {
+    transform: scale(1);
   }
 }
 
@@ -471,5 +475,13 @@ body {
   .btnl {
     font-size: 1.4rem;
     width: 17rem;
+  }
+  .modal {
+    justify-content: flex-start;
+  }
+  .card {
+    margin-top: 10%;
+    height: 40%;
+    width: 50%;
   }
 }
