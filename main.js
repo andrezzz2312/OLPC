@@ -98,7 +98,8 @@ const container = document.getElementById('container')
 let canvas = document.getElementById('artifactcanvas')
 let btn_screen = document.getElementById('btn_screen')
 let img_screen = document.getElementById('btn_screen_imagen')
-let mobileD = window.matchMedia('(max-height: 550px)')
+let mobileD = window.matchMedia('(max-width: 700px)')
+
 //botones en letiables
 let btnabrir = document.getElementById('boton_abrir')
 let btncerrar = document.getElementById('boton_cerrar')
@@ -177,16 +178,17 @@ const renderer = new THREE.WebGLRenderer({
   alpha: true,
   antialias: true,
 })
+
 renderer.setPixelRatio(window.devicePixelRatio)
 
 renderer.setSize(box_canvas.offsetWidth, box_canvas.offsetHeight)
-// renderer.scale.set()
+
 camera.aspect = box_canvas.offsetWidth / box_canvas.offsetHeight
 camera.updateProjectionMatrix()
 renderer.toneMapping = THREE.ACESFilmicToneMapping
 renderer.toneMappingExposure = 0.4
 renderer.outputEncoding = THREE.sRGBEncoding
-//container.appendChild( renderer.domElement );
+
 clock = new THREE.Clock()
 
 //hdri
@@ -487,11 +489,18 @@ btntablet.addEventListener('click', modetablet)
 btnspecs.addEventListener('click', mostrar_opciones_especs)
 botonar.addEventListener('click', ar)
 //responsive
-window.addEventListener('resize', onWindowResize)
+window.addEventListener('resize', onWindowResize, false)
 function onWindowResize() {
   camera.aspect = box_canvas.offsetWidth / box_canvas.offsetHeight
   camera.updateProjectionMatrix()
   renderer.setSize(box_canvas.offsetWidth, box_canvas.offsetHeight)
+  if (mobileD.matches) {
+    console.log('mobile')
+    // renderer.setSize(window.innerWidth, (window.innerHeight * 40) / 100)
+  } else {
+    console.log('desktop')
+    // renderer.setSize((window.innerWidth * 60) / 100, window.innerHeight)
+  }
 }
 
 camera.position.z = 38
@@ -529,6 +538,9 @@ function mostrar_opciones_especs() {
 }
 //scene.background = blanco;
 const animate = function () {
+  camera.aspect = box_canvas.offsetWidth / box_canvas.offsetHeight
+  camera.updateProjectionMatrix()
+  renderer.setSize(box_canvas.offsetWidth, box_canvas.offsetHeight)
   if (sceneReady && mostrar_especificaciones) {
     point.forEach((element) => {
       element.style.opacity = '1'
@@ -569,8 +581,8 @@ const animate = function () {
         }
       }
 
-      const translateX = screenPosition.x * sizes.width * 0.5
-      const translateY = -screenPosition.y * sizes.height * 0.5
+      const translateX = screenPosition.x * box_canvas.offsetWidth * 0.5
+      const translateY = -screenPosition.y * box_canvas.offsetHeight * 0.5
       point.element.style.transform = `translateX(${translateX}px) translateY(${translateY}px)`
     }
   } else {

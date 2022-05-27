@@ -24,9 +24,10 @@ body {
 }
 
 .btnl {
-  width: 25rem;
+  width: 74%;
+  max-width: 77%;
 
-  font-size: var(--font-size);
+  font-size: calc(7px + (24 - 7) * ((100vw - 320px) / (1440 - 320)));
   font-weight: var(--font-weight);
   cursor: pointer;
   font-family: Poppins;
@@ -58,7 +59,7 @@ body {
 .point {
   position: absolute;
   top: 50%;
-  left: 35%;
+  left: 30%;
   transition: opacity 0.3s;
 }
 
@@ -371,12 +372,15 @@ body {
   width: 100%;
 }
 #cont-canvas {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   width: 60%;
   height: 100%;
 }
 #artifactcanvas {
-  width: 100%;
-  height: 100%;
+  /* min-width: 100% !important;
+  max-width: 100% !important; */
 }
 
 #container-buttongroup {
@@ -449,7 +453,7 @@ body {
   }
 }
 
-@media (max-width: 550px) and (orientation: portrait) {
+@media (max-width: 700px) {
   #container {
     flex-direction: column;
     justify-content: space-between;
@@ -459,13 +463,16 @@ body {
     height: auto;
   }
   #container-buttongroup {
-    height: 100%;
+    height: 80%;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     gap: 0.7rem;
+  }
+  #btn_ar {
+    margin-bottom: 2rem;
   }
   .point {
     position: absolute;
@@ -484,5 +491,58 @@ body {
     margin-top: 10%;
     height: 40%;
     width: 50%;
+  }
+  .point {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: opacity 0.3s;
+  }
+}
+
+@media (orientation: portrait) {
+  #container {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  #cont-canvas {
+    width: 100%;
+    height: auto;
+  }
+  #container-buttongroup {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  #btn_ar {
+    margin-bottom: 2rem;
+  }
+  .point {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transition: opacity 0.3s;
+  }
+  .btnl {
+    font-size: 1.4rem;
+    width: 17rem;
+  }
+  .modal {
+    justify-content: flex-start;
+  }
+  .card {
+    margin-top: 10%;
+    height: 40%;
+    width: 50%;
+  }
+  .point {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: opacity 0.3s;
   }
 }
